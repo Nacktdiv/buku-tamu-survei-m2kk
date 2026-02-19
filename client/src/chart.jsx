@@ -1,24 +1,45 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Label, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
+import {useMediaQuery} from 'react-responsive';
 
-function Charts ({data}) {
+function Charts ({dataext}) {
+    const isMobile = useMediaQuery({ maxWidth: 639 });
+    const isTablet = useMediaQuery({ minWidth: 640, maxWidth: 1023 });
+    const isDesktop = useMediaQuery({ minWidth: 1024, maxWidth: 1439 });
+    const isLarge = useMediaQuery({ minWidth: 1440 });
 
-    let datadummy = [
+    let aspect = 2;
+
+    if (isMobile) aspect = 1.5;
+    else if (isTablet) aspect = 1.5;
+    else if (isDesktop) aspect = 2.2;
+    else if (isLarge) aspect = 3;
+
+    const datadummy = [
         { name: 'Sangat Puas', value: 81 },
         { name: 'Puas', value: 24 },
         { name: 'Cukup', value: 6 },
         { name: 'Tidak Puas', value: 6 },
     ];
+     
+    let data  =  null
 
+    if (dataext == null || dataext.length === 0) {
+        data = datadummy;
+    }
+    else {
+        data = dataext;
+    }
+    
     const COLORS = ['#136a43', '#2d3436', '#88b498', '#a5d6a7'];
 
-    const totalResponden = data.reduce((acc, item) => acc + item.value, 0);
+    const totalResponden = data?.reduce((acc, item) => acc + item.value, 0);
 
     return (
         <div className="mt-10 w-full h-full flex flex-col items-center justify-center">
             <h1 className="md:text-2xl font-bold max-w-[80%] text-center">Grafik Hasil Survey Kepuasan Layanan PTSP</h1>
             <div className='w-[70%] bg-background h-75 md:h-65 rounded-lg mt-6 flex flex-col md:flex-row items-center'>
-                <div className='md:w-2/5 w-full h-[80%] '>
-                    <ResponsiveContainer className='h-full w-full' height="100%" width="100%">
+                <div className='md:w-2/5 w-full h-full flex justify-center items-center '>
+                    <ResponsiveContainer width="100%" aspect={aspect}>
                         <PieChart>
                         <Pie
                             data={data}
@@ -30,7 +51,7 @@ function Charts ({data}) {
                             dataKey="value"
                             stroke="none"
                         >
-                            {data.map((entry, index) => (
+                            {data?.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
 
@@ -55,7 +76,7 @@ function Charts ({data}) {
                     </ResponsiveContainer>
                 </div>
                 <div className='w-full md:w-3/5 h-full flex flex-col'>
-                    <ResponsiveContainer width="100%" height="100%">
+                    <ResponsiveContainer width="100%" aspect={aspect}>
                         <BarChart 
                             data={data} 
                             layout="vertical" 
@@ -75,7 +96,7 @@ function Charts ({data}) {
                             />
                             <Tooltip cursor={{fill: '#f0f0f0'}} />
                             <Bar dataKey="value" radius={[0, 10, 10, 0]} barSize={40}>
-                                {data.map((entry, index) => (
+                                {data?.map((entry, index) => (
                                     <Cell key={`cell-bar-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Bar>

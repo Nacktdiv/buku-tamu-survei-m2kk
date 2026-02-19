@@ -24,9 +24,6 @@ export default function App () {
   const [surveyData, setSurveyData] = useState({ kategori: ''});
   const [surveyResults, setSurveyResults] = useState();
 
-  console.log(surveyResults)
-
-
   useEffect(() => {
     if (!guestBookData.nama || !guestBookData.email || !guestBookData.nomor_telepon || !guestBookData.kategori || !guestBookData.alamat) return
     createBukuTamu(guestBookData);
@@ -139,7 +136,7 @@ return (
       onSubmit={setSurveyData} 
       title="Form Survey Kepuasan"
     />  
-    <Chart data={surveyResults}/>
+    <Chart dataext={surveyResults}/>
     <Footer/>
   </>  
 )
