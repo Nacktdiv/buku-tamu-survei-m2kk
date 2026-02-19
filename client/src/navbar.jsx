@@ -12,7 +12,7 @@ function Navbar () {
             </div>
             <button 
                 onClick={() => setMenu(!menu)}
-                className='text-3xl'>
+                className='text-3xl hover-scale-in'>
                 <HiBars4/>
             </button>
             <ul className={`

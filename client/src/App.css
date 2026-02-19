@@ -67,3 +67,15 @@ table {
   --color-accent-green: #a5d6a7;
   --color-accent-yellow: #fbc02d;
 }
+
+@layer utilities {
+   .hover-scale-in {
+    transform: scale(1);
+    transition: transform 0.25s ease-in-out;
+  }
+
+  .hover-scale-in:hover {
+    transform: scale(1.2);
+  }
+}
+

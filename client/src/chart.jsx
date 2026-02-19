@@ -44,7 +44,7 @@ function Charts ({dataext}) {
         <div className="mt-10 w-full h-full flex flex-col items-center justify-center">
             <h1 className="md:text-2xl font-bold max-w-[80%] text-center">Grafik Hasil Survey Kepuasan Layanan PTSP</h1>
             <div className='w-[70%] bg-white h-75 md:h-65 rounded-lg mt-6 flex flex-col md:flex-row items-center'>
-                <div className='md:w-2/5 w-full h-full flex justify-center items-center '>
+                <div className='md:w-2/5 w-full h-full flex justify-center items-center hover-scale-in'>
                     <ResponsiveContainer width="100%" aspect={aspectpie}>
                         <PieChart>
                         <Pie
@@ -81,7 +81,7 @@ function Charts ({dataext}) {
                         </PieChart>
                     </ResponsiveContainer>
                 </div>
-                <div className='w-full md:w-3/5 h-full flex flex-col'>
+                <div className='w-full md:w-3/5 h-full flex flex-col '>
                     <ResponsiveContainer width="100%" aspect={aspectbar}>
                         <BarChart 
                             data={data} 
@@ -101,7 +101,7 @@ function Charts ({dataext}) {
                                 width={100}
                             />
                             <Tooltip cursor={{fill: '#f0f0f0'}} />
-                            <Bar dataKey="value" radius={[0, 10, 10, 0]} barSize={40}>
+                            <Bar dataKey="value" radius={[0, 10, 10, 0]} barSize={40} activeBar={{ transform: 'scale(1.1)' }}>
                                 {data?.map((entry, index) => (
                                     <Cell key={`cell-bar-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}

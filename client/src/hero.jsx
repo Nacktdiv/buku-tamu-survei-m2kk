@@ -18,7 +18,7 @@ function Hero ({ setIsGuestBookOpen, setIsSurveyOpen }) {
 
 function Card ({bg, bgbtn, tittle, desc, textbtn, onClick, icon }){
     return (
-        <div className={`flex w-60 h-30 md:w-100 md:h-50 lg:w-120 lg:h-60 md:-translate-y-1/2 ${bg} border-4 border-accent-green rounded-xl shadow-2xl`}>
+        <div className={`flex w-60 h-30 md:w-100 md:h-50 lg:w-120 lg:h-60 md:-translate-y-1/2 ${bg} border-4 border-accent-green rounded-xl shadow-2xl hover-scale-in`}>
             <div className="w-fit h-full flex items-center px-6">
                 <div className="bg-gray-200 rounded-full h-1/2 w-15 md:w-25 lg:w-30 flex justify-center items-center text-primary-light text-3xl md:text-6xl lg:text-7xl">{icon}</div>
             </div>
