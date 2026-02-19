@@ -7,12 +7,18 @@ function Charts ({dataext}) {
     const isDesktop = useMediaQuery({ minWidth: 1024, maxWidth: 1439 });
     const isLarge = useMediaQuery({ minWidth: 1440 });
 
-    let aspect = 2;
+    let aspectpie = 1.5;
+    let aspectbar = 1.5;
 
-    if (isMobile) aspect = 1.5;
-    else if (isTablet) aspect = 1.5;
-    else if (isDesktop) aspect = 2.2;
-    else if (isLarge) aspect = 3;
+    if (isMobile) aspectpie = 1.5;
+    else if (isTablet) aspectpie = 1.2;
+    else if (isDesktop) aspectpie = 2.2;
+    else if (isLarge) aspectpie = 2.2;
+
+    if (isMobile) aspectbar = 1.5;
+    else if (isTablet) aspectbar = 1.5;
+    else if (isDesktop) aspectbar = 2.2;
+    else if (isLarge) aspectbar = 3;
 
     const datadummy = [
         { name: 'Sangat Puas', value: 81 },
@@ -37,9 +43,9 @@ function Charts ({dataext}) {
     return (
         <div className="mt-10 w-full h-full flex flex-col items-center justify-center">
             <h1 className="md:text-2xl font-bold max-w-[80%] text-center">Grafik Hasil Survey Kepuasan Layanan PTSP</h1>
-            <div className='w-[70%] bg-background h-75 md:h-65 rounded-lg mt-6 flex flex-col md:flex-row items-center'>
+            <div className='w-[70%] bg-white h-75 md:h-65 rounded-lg mt-6 flex flex-col md:flex-row items-center'>
                 <div className='md:w-2/5 w-full h-full flex justify-center items-center '>
-                    <ResponsiveContainer width="100%" aspect={aspect}>
+                    <ResponsiveContainer width="100%" aspect={aspectpie}>
                         <PieChart>
                         <Pie
                             data={data}
@@ -76,7 +82,7 @@ function Charts ({dataext}) {
                     </ResponsiveContainer>
                 </div>
                 <div className='w-full md:w-3/5 h-full flex flex-col'>
-                    <ResponsiveContainer width="100%" aspect={aspect}>
+                    <ResponsiveContainer width="100%" aspect={aspectbar}>
                         <BarChart 
                             data={data} 
                             layout="vertical" 

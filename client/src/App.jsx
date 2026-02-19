@@ -8,7 +8,6 @@ import getSurvey from "./api/getSurvey";
 import createSurvey from "./api/createSurvey";
 import "./App.css"
 import createBukuTamu from "./api/createBukuTamu";
-import { use } from "react";
 
 export default function App () {
   const [isGuestBookOpen, setIsGuestBookOpen] = useState(false);

@@ -5,7 +5,7 @@ import { useState } from 'react'
 function Navbar () {
     const [menu, setMenu] = useState(false)
     return(
-        <nav id="navbar" className="z-1 fixed w-full flex items-center justify-between text-white h-18 py-5 px-2 ">
+        <nav id="navbar" className="z-1 fixed w-full max-w-screen flex items-center justify-between text-white h-18 py-5 px-4 ">
             <div id="background" className='absolute left-0 w-full h-full bg-primary -z-1 opacity-80'></div>
             <div id="logo" className="md:h-full h-[60%]">
                 <img src={logoMan} alt="Logo MAN2 Kota Kediri" className="w-full h-full object-contain"/>
