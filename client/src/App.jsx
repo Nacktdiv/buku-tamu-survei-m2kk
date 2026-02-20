@@ -12,28 +12,17 @@ import createBukuTamu from "./api/createBukuTamu";
 export default function App () {
   const [isGuestBookOpen, setIsGuestBookOpen] = useState(false);
   const [isSurveyOpen, setIsSurveyOpen] = useState(false);
-  const [guestBookData, setGuestBookData] = useState({
-    nama: '',
-    email: '',
-    nomor_telepon: '',
-    kategori: '',
-    alamat: '',
-    keterangan: ''
-  });
-  const [surveyData, setSurveyData] = useState({ kategori: ''});
   const [surveyResults, setSurveyResults] = useState();
 
-  useEffect(() => {
-    if (!guestBookData.nama || !guestBookData.email || !guestBookData.nomor_telepon || !guestBookData.kategori || !guestBookData.alamat) return
-    createBukuTamu(guestBookData);
-    console.log("Data Buku Tamu:", guestBookData);
-  }, [guestBookData]);
-  
-  useEffect(() => {
-    if (!surveyData.kategori) return
-    createSurvey(surveyData);
-    console.log("Data Survey:", surveyData);
-  }, [surveyData]);
+  const setGuestBookData = async (data) => {
+    await createBukuTamu(data);
+  }
+
+  const setSurveyData = async (data) => {
+    await createSurvey(data);
+    const res = await getSurvey();
+    setSurveyResults(res.data);
+  }
 
   useEffect( () => {
       const fetchSurvey = async () => {

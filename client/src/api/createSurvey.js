@@ -7,8 +7,15 @@ async function createSurvey(data) {
             body: JSON.stringify(data)
         })
         .then(response => response.json())
-        .then(result => console.log('Success:', result))
-        .catch(error => console.error('Error:', error));
+        .then(result =>{
+            if (import.meta.env.VITE_ENV === 'development') {
+                console.log('Success:', result)
+            }})
+
+        .catch(error =>{
+            if (import.meta.env.VITE_ENV === 'development') {
+                console.log('Error:', error)
+            }})
 }
 
 export default createSurvey

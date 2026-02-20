@@ -9,7 +9,9 @@ async function getSurvey() {
     const data = await res.json();
     return data;
     } catch (error) {
-        console.error('Error:', error);
+        if (import.meta.env.VITE_ENV === 'development') {
+            console.log('Error:', error)
+        }
         return [];
     }
 }

@@ -4,7 +4,7 @@ const response = (data, message, status) => {
         "message": message,
         "data": data,
         "meta": {
-            "timestamp": "2023-10-27T10:00:00Z"
+            "timestamp": new Date().toISOString()
         }
     }
 }

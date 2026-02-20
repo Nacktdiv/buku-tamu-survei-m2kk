@@ -10,7 +10,7 @@ const db = new Sequelize(
     {
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
-        dialect: 'postgres',
+        dialect: 'mysql',
         logging: false,
     }
 );
@@ -18,9 +18,9 @@ const db = new Sequelize(
 const testConnection = async () => {
   try {
     await db.query('SELECT NOW()');
-    console.log('✅ PostgreSQL connection successful');
+    console.log('✅ MySQL connection successful');
   } catch (err) {
-    console.error('❌ PostgreSQL connection error:', err);
+    console.error('❌ MySQL connection error:', err);
     process.exit(-1);
   }
 }
