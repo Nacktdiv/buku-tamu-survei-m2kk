@@ -19,18 +19,15 @@ function Charts ({dataext}) {
     else if (isTablet) aspectbar = 1.5;
     else if (isDesktop) aspectbar = 2.2;
     else if (isLarge) aspectbar = 3;
-
-    const datadummy = [
-        { name: 'Sangat Puas', value: 81 },
-        { name: 'Puas', value: 24 },
-        { name: 'Cukup', value: 6 },
-        { name: 'Tidak Puas', value: 6 },
-    ];
      
     let data  =  null
 
     if (dataext == null || dataext.length === 0) {
-        data = datadummy;
+        return (
+            <div className="mt-10 w-full h-40 flex items-center justify-center border-2 border-dashed border-gray-200 rounded-lg">
+                <p className="text-gray-500 font-medium">Belum ada data survey untuk ditampilkan.</p>
+            </div>
+        );
     }
     else {
         data = dataext;
