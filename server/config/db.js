@@ -1,23 +1,51 @@
 const {Sequelize} = require('sequelize');
+const mysql2 = require('mysql2')
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-const db = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        dialect: 'mysql',
-        logging: false,
-    }
-);
+const templateEnv = ['NAME', 'USER', 'PASS', 'HOST', 'PORT']
+const nameProject = ['BUKUTAMU']
+
+const setupData = nameProject.reduce((acc, curr) => {
+  acc[curr] = templateEnv.map((item, index) => {
+    const data = process.env[`MYSQL_${curr}_${item}`]
+    if (!data) throw new Error (`Variabel di env ada yang kosong! Cek file .env kamu, hint = MYSQL_${curr}_${item}`)
+    return data
+  })
+  return acc
+}, {})
+
+db = Object.entries(setupData).reduce((acc, [name, property]) => {
+  acc[name] = new Sequelize(property[0], property[1], property[2], {
+    host: property[3],
+    port: property[4],
+    dialect: 'mysql',
+    dialectModule: mysql2,
+    logging:false
+  })
+  return acc
+}, {})
 
 const testConnection = async () => {
   try {
-    await db.query('SELECT NOW()');
+    await Promise.all(
+       nameProject.map(async (item, index) => {
+        await Promise.all([
+          db[item].authenticate(),
+          db[item].sync()
+        ])
+
+        if (process.env.NODE_ENV == 'production') {
+          await Promise.all ([
+                db[item].sync({ alter: true })
+          ]) 
+        }
+
+        console.log(`✅ Koneksi ke database ${item} berhasil.`);
+      })
+    )
+
     console.log('✅ MySQL connection successful');
   } catch (err) {
     console.error('❌ MySQL connection error:', err);
@@ -25,5 +53,4 @@ const testConnection = async () => {
   }
 }
 
-
-module.exports = {db, testConnection}
+module.exports = {db : db['BUKUTAMU'], testConnection}
